@@ -1,5 +1,11 @@
 Revision history for Perl extension Catalyst::Plugin::Breadcrumbs
 
+4  09-08-2006 03:07:00
+        - Minor POD fix.
+        - Fix bug where '/' and '/index' were being treated differently.
+        - Under some circumstances, $c->req->action wasn't containing the
+          full path information we required.
+
 3  09-08-2006 02:11:00
         - Alter README to be more INSTALL based rather than POD based.
         - Fix same hangover legacy stuff in the POD.

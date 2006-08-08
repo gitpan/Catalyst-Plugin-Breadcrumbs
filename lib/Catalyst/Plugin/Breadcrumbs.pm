@@ -2,7 +2,7 @@ package Catalyst::Plugin::Breadcrumbs;
 use warnings;
 use strict;
 
-our $VERSION = 3;
+our $VERSION = 4;
 
 =head1 NAME
 
@@ -10,25 +10,25 @@ Catalyst::Plugin::Breadcrumbs - Breadcrumb information for your templates.
 
 =head1 SYNOPSIS
 
-use Catalyst qw/-Debug Breadcrumbs/;
+    use Catalyst qw/-Debug Breadcrumbs/;
 
-__PACKAGE__->config(
+    __PACKAGE__->config(
 
-    ....
+        ....
 
-    breadcrumbs => {
-        hide_index => 1,
-        hide_home  => 1,
-        labels     => {
-            '/'       => 'Home label',
-            '/foobar' => 'FooBar label',
-            ....
+        breadcrumbs => {
+            hide_index => 1,
+            hide_home  => 0,
+            labels     => {
+                '/'       => 'Home label',
+                '/foobar' => 'FooBar label',
+                ....
+            },
         },
-    },
 
-    ....
+        ....
 
-)
+    )
 
 =head1 DESCRIPTION
 
@@ -102,9 +102,12 @@ doesn't take care of this, it is left up to the template.
 sub breadcrumbs {
     my $c = shift;
 
-    my @breadcrumbs;
-    my @paths = split('/', $c->req->action);
+    my $action = $c->req->action;
+    $action = join('/', $c->namespace, $action) unless $action =~ m#/#;
 
+    my @paths = split('/', $action);
+
+    my @breadcrumbs;
     while (my $label = pop @paths) {
         next if $label eq 'index' and $c->config->{breadcrumbs}->{hide_index};
         my $path = join('/', @paths, $label);
@@ -116,10 +119,7 @@ sub breadcrumbs {
         };
     }
 
-    unless (
-        $c->config->{breadcrumbs}->{hide_home}
-        or $c->req->path eq 'index'
-    ) {
+    unless ($c->config->{breadcrumbs}->{hide_home}) {
         my $label = _label_for($c, '/', 'home');
         push @breadcrumbs, { path => '/', label => $label };
     }
