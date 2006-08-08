@@ -1,0 +1,11 @@
+Build.PL
+Changes
+lib/Catalyst/Plugin/Breadcrumbs.pm
+Makefile.PL
+MANIFEST
+META.yml
+README
+t/01use.t
+t/02pod.t
+t/03podcoverage.t
+t/04live.t
