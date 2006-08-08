@@ -2,7 +2,7 @@ package Catalyst::Plugin::Breadcrumbs;
 use warnings;
 use strict;
 
-our $VERSION = 1;
+our $VERSION = 2;
 
 =head1 NAME
 

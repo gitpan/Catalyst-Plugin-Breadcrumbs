@@ -1,4 +1,8 @@
 Revision history for Perl extension Catalyst::Plugin::Breadcrumbs
 
-0.01  08-08-2006 17:13:00
+2  08-08-2006 23:15:00
+        - Fix README.
+        - Add LICENSE.
+
+1  08-08-2006 17:13:00
         - original version.
