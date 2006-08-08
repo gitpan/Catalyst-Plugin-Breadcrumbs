@@ -2,7 +2,7 @@ package Catalyst::Plugin::Breadcrumbs;
 use warnings;
 use strict;
 
-our $VERSION = 2;
+our $VERSION = 3;
 
 =head1 NAME
 
@@ -62,7 +62,7 @@ default to 'Foo Bar'.
 
 This method will return an array ref that you can iterate
 through in your template. It will be an array of hashrefs,
-each having a "link" and a "text" field.
+each having a "path" and a "label" field.
 
 E.g.
 
@@ -71,9 +71,12 @@ E.g.
         <!-- We don't want to have a link or divider for the
              last breadcrumb -->
         [% IF loop.last %]
-            [% item.text %]
+            [% item.label %]
         [% ELSE %]
-            <a href="[% item.link %]">item.text</a> &gt;&gt;
+            <a href="[% c.uri_for(item.path) %]">
+                item.label
+            </a>
+            &gt;&gt;
         [% END %]
     [% END %]
  </div>

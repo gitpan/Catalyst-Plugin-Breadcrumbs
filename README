@@ -1,87 +1,51 @@
-NAME
-       Catalyst::Plugin::Breadcrumbs - Breadcrumb information for your tem‐
-       plates.
+Catalyst-Plugin-Breadcrumbs
+===========================
 
-SYNOPSIS
-       use Catalyst qw/-Debug Breadcrumbs/;
+Catalyst::Plugin::Breadcrumbs is a plugin for catalyst that allows you to
+get an arrayref of all the breadcrumb information associated with the
+current request. This is easy to iterate over in your template.
 
-       __PACKAGE__->config(
+For more details please read POD of that module.
 
-           ....
+INSTALLATION
 
-           breadcrumbs => {
-               hide_index => 1,
-               hide_home  => 1,
-               labels     => {
-                   ’/’       => ’Home label’,
-                   ’/foobar’ => ’FooBar label’,
-                   ....
-               },
-           },
+To install this module type the following:
 
-           ....
+    perl Makefile.PL
+    make
+    make test
+    make install
 
-       )
+To install this module in the specific path use:
 
-DESCRIPTION
-       This plugin provides the ability to use c.breadcrumbs from your tem‐
-       plate to get a nice loop of the breadcrumb information.
+    perl Makefile.PL PREFIX=/path/to/your/lib
 
-       There are some very basic configuration options for you to use as you
-       can see above. By default both hide_index and hide_home are off.
+To install the module in your home directory use that command:
 
-       Set hide_home to a true value if you don’t want to see the root loca‐
-       tion ’/’ to be interpreted as part of your breadcrumbs.
+    perl Makefile.PL PREFIX=YOU_HOME/path/to/your/lib
 
-       Set hide_index to a true value if you don’t want to see ’Index’ as the
-       last piece of your breadcrumb when you hit a path such as ’/foo/’,
-       which in Catalyst, implies an ’index’ action. You will almost always
-       want to be setting this value. So much so that in future versions it
-       may be on by default, so I suggest not relying on it being on by
-       default, turn it on of you want it.
+Note: you don't need to have a root privileges to do that!
 
-       Use the labels hash if you aren’t happy with the default types of
-       labels. Which is pretty much ucfirst($path), but underscores will also
-       be replaced with spaces by default. /foo_bar would default to ’Foo
-       Bar’.
+Also, you can use CPAN shell:
 
-METHODS
-       breadcrumbs
-           This method will return an array ref that you can iterate through
-           in your template. It will be an array of hashrefs, each having a
-           "link" and a "text" field.
+    > perl -MCPAN -e shell
+    cpan> install Catalyst::Plugin::Breadcrumbs
 
-           E.g.
+or use command 'cpan':
 
-            <div id="breadcrumbs">
-               [% FOREACH item IN c.breadcrumbs %]
-                   <!-- We don’t want to have a link or divider for the
-                        last breadcrumb -->
-                   [% IF loop.last %]
-                       [% item.text %]
-                   [% ELSE %]
-                       <a href="[% item.link %]">item.text</a> &gt;&gt;
-                   [% END %]
-               [% END %]
-            </div>
+    > cpan install Catalyst::Plugin::Breadcrumbs
 
-           Will print breadcrumbs like:
+DEPENDENCIES
 
-           Home >> Admin >> Edit
+This module requires these other modules and libraries:
 
-           If you are like me, you will move all that into a breadcrumbs.tt
-           and include it on every page that you want breadcrumbs on. I also
-           have something like this after my breadcrumbs:
-
-           [% IF object %] &gt;&gt; [% object.title %][% END %]
-
-           So that your breadcrumbs are more like "Home >> Admin >> Edit >>
-           $title". The breadcrumbs method doesn’t take care of this, it is
-           left up to the template.
+    Catalyst
 
 AUTHOR
-       Danial Pearce <cpan@tigris.id.au>
 
-LICENSE
-       This module is free software; you can redistribute it and/or modify it
-       under the same terms as Perl itself.
+Danial Pearce (cpan@tigris.id.au)
+
+COPYRIGHT AND LICENCE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.

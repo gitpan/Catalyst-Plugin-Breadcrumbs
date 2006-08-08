@@ -1,5 +1,9 @@
 Revision history for Perl extension Catalyst::Plugin::Breadcrumbs
 
+3  09-08-2006 02:11:00
+        - Alter README to be more INSTALL based rather than POD based.
+        - Fix same hangover legacy stuff in the POD.
+
 2  08-08-2006 23:15:00
         - Fix README.
         - Add LICENSE.

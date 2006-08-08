@@ -1,6 +1,6 @@
 ---
 name: Catalyst-Plugin-Breadcrumbs
-version: 2
+version: 3
 author:
   - 'Danial Pearce <cpan@tigris.id.au>'
 abstract: Breadcrumb information for your templates.
@@ -10,5 +10,5 @@ requires:
 provides:
   Catalyst::Plugin::Breadcrumbs:
     file: lib/Catalyst/Plugin/Breadcrumbs.pm
-    version: 2
+    version: 3
 generated_by: Module::Build version 0.2611
