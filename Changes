@@ -1,5 +1,9 @@
 Revision history for Perl extension Catalyst::Plugin::Breadcrumbs
 
+5  12-08-2006 11:14:00
+        - Use <ul> as breadcrumb display in POD.
+            (Thanks to Guy King for pointing out my lack of HTML ability)
+
 4  09-08-2006 03:07:00
         - Minor POD fix.
         - Fix bug where '/' and '/index' were being treated differently.

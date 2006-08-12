@@ -2,7 +2,7 @@ package Catalyst::Plugin::Breadcrumbs;
 use warnings;
 use strict;
 
-our $VERSION = 4;
+our $VERSION = 5;
 
 =head1 NAME
 
@@ -66,34 +66,38 @@ each having a "path" and a "label" field.
 
 E.g.
 
- <div id="breadcrumbs">
+ <ul id="breadcrumbs">
     [% FOREACH item IN c.breadcrumbs %]
-        <!-- We don't want to have a link or divider for the
-             last breadcrumb -->
+    <li>
+        <!-- We don't want to have a link for the last
+             breadcrumb, cos we are already there -->
         [% IF loop.last %]
             [% item.label %]
         [% ELSE %]
-            <a href="[% c.uri_for(item.path) %]">
-                item.label
-            </a>
-            &gt;&gt;
+            <a href="[% c.uri_for(item.path) %]">item.label</a>
         [% END %]
+    </li>
     [% END %]
- </div>
+ </ul>
 
 Will print breadcrumbs like:
 
-Home >> Admin >> Edit
+ o Home
+ o Admin
+ o Edit
 
 If you are like me, you will move all that into a breadcrumbs.tt
 and include it on every page that you want breadcrumbs on. I
 also have something like this after my breadcrumbs:
 
-[% IF object %] &gt;&gt; [% object.title %][% END %]
+[% IF object %]<li>[% object.title %]</li>[% END %]
 
-So that your breadcrumbs are more like
-"Home >> Admin >> Edit >> $title". The breadcrumbs method
-doesn't take care of this, it is left up to the template.
+So that your breadcrumbs has the title of the current object you
+are viewing. The breadcrumbs method doesn't take care of this, it
+is left up to the template. You will then of course style your
+#breadcrumbs li { list-style: none; display: inline } in order to
+get them all on one line. You can alter the style to have
+background images and whatever you like.
 
 =back
 
